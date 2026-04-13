@@ -7,6 +7,7 @@ from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from bookstore.config import get_settings
 from bookstore.dependencies import init_database
@@ -37,6 +38,12 @@ def create_app() -> FastAPI:
         title=settings.app_title,
         version=settings.app_version,
         lifespan=lifespan,
+    )
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_methods=["*"],
+        allow_headers=["*"],
     )
     app.include_router(authors_router, prefix="/api/v1")
     app.include_router(books_router, prefix="/api/v1")
