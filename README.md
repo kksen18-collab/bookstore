@@ -48,6 +48,12 @@ bookstore/
 ├── uv.lock                                 # locked dependencies
 ├── .gitignore
 ├── README.md
+├── frontend/                               # Vanilla-JS single-page app
+│   ├── index.html
+│   ├── css/style.css
+│   └── js/
+│       ├── api.js                          #   REST client
+│       └── app.js                          #   UI logic
 ├── src/
 │   └── bookstore/
 │       ├── __init__.py
@@ -107,6 +113,62 @@ uv run uvicorn bookstore.main:app --reload
 # Open Swagger UI
 # http://127.0.0.1:8000/docs
 ```
+
+## Frontend
+
+A lightweight, vanilla-JS single-page application lives in the `frontend/` directory. It requires no build step or additional dependencies — just open it in a browser while the API server is running.
+
+### Structure
+
+```
+frontend/
+├── index.html          # SPA shell with tab-based navigation
+├── css/
+│   └── style.css       # Responsive stylesheet
+└── js/
+    ├── api.js          # API client (authorsApi, booksApi, ordersApi)
+    └── app.js          # UI logic (tabs, tables, modals, CRUD handlers)
+```
+
+### Running the frontend
+
+**Option 1 — open directly** (simplest, works for most browsers):
+
+```bash
+# 1. Start the API server
+uv run uvicorn bookstore.main:app --reload
+
+# 2. Open the frontend
+open frontend/index.html          # macOS
+xdg-open frontend/index.html      # Linux
+start frontend/index.html         # Windows
+```
+
+**Option 2 — serve with Python** (avoids any same-origin restrictions):
+
+```bash
+# Serve the frontend on port 3000 while the API runs on 8000
+python -m http.server 3000 --directory frontend
+# Then visit http://localhost:3000
+```
+
+### Configuring the API URL
+
+By default the frontend connects to `http://localhost:8000/api/v1`. To point it at a different host, set `window.BOOKSTORE_API_URL` before the scripts load:
+
+```html
+<script>window.BOOKSTORE_API_URL = "https://my-api.example.com/api/v1";</script>
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+```
+
+### Features
+
+| Section | Operations |
+|---------|-----------|
+| **Books** | List · Create · Edit · Delete |
+| **Authors** | List · Create · Edit · Delete |
+| **Orders** | List · Create · Update status |
 
 ## API Endpoints
 

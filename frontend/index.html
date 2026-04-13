@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bookstore</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <header class="header">
+        <h1 class="header__title">Bookstore</h1>
+        <p class="header__subtitle">Manage your authors, books, and orders</p>
+    </header>
+
+    <nav class="nav">
+        <button class="nav__tab nav__tab--active" data-tab="books">Books</button>
+        <button class="nav__tab" data-tab="authors">Authors</button>
+        <button class="nav__tab" data-tab="orders">Orders</button>
+    </nav>
+
+    <main class="main">
+        <section id="tab-books" class="tab tab--active">
+            <div class="section-header">
+                <h2>Books</h2>
+                <button class="btn btn--primary" id="btn-add-book">+ Add Book</button>
+            </div>
+            <div id="books-table" class="table-container"></div>
+            <div id="books-pagination" class="pagination"></div>
+        </section>
+
+        <section id="tab-authors" class="tab">
+            <div class="section-header">
+                <h2>Authors</h2>
+                <button class="btn btn--primary" id="btn-add-author">+ Add Author</button>
+            </div>
+            <div id="authors-table" class="table-container"></div>
+            <div id="authors-pagination" class="pagination"></div>
+        </section>
+
+        <section id="tab-orders" class="tab">
+            <div class="section-header">
+                <h2>Orders</h2>
+                <button class="btn btn--primary" id="btn-add-order">+ Add Order</button>
+            </div>
+            <div id="orders-table" class="table-container"></div>
+            <div id="orders-pagination" class="pagination"></div>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div class="modal">
+            <div class="modal__header">
+                <h3 class="modal__title" id="modal-title">Title</h3>
+                <button class="modal__close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal__body" id="modal-body"></div>
+            <div class="modal__footer">
+                <button class="btn btn--secondary" id="modal-cancel">Cancel</button>
+                <button class="btn btn--primary" id="modal-submit">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast notification -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
