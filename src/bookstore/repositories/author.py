@@ -10,7 +10,7 @@ from bookstore.models.author import AuthorCreate, AuthorUpdate
 from bookstore.repositories.base import BaseRepository
 
 
-class AuthorRepository(BaseRepository[AuthorORM]):
+class AuthorRepository(BaseRepository[AuthorORM, AuthorCreate, AuthorUpdate]):
     """SQLAlchemy implementation of Author data access."""
 
     def __init__(self, session: AsyncSession) -> None:

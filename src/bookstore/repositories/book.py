@@ -10,7 +10,7 @@ from bookstore.models.book import BookCreate, BookUpdate
 from bookstore.repositories.base import BaseRepository
 
 
-class BookRepository(BaseRepository[BookORM]):
+class BookRepository(BaseRepository[BookORM, BookCreate, BookUpdate]):
     """SQLAlchemy implementation of Book data access."""
 
     def __init__(self, session: AsyncSession) -> None:

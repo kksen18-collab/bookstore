@@ -8,9 +8,11 @@ from typing import Generic, TypeVar
 from pydantic import BaseModel
 
 T = TypeVar("T")
+CreateT = TypeVar("CreateT", bound=BaseModel)
+UpdateT = TypeVar("UpdateT", bound=BaseModel)
 
 
-class BaseRepository(ABC, Generic[T]):
+class BaseRepository(ABC, Generic[T, CreateT, UpdateT]):
     """Abstract base for all repositories."""
 
     @abstractmethod
@@ -22,11 +24,11 @@ class BaseRepository(ABC, Generic[T]):
         """Retrieve a paginated list of entities and the total count."""
 
     @abstractmethod
-    async def create(self, data: BaseModel) -> T:
+    async def create(self, data: CreateT) -> T:
         """Create a new entity from the given data."""
 
     @abstractmethod
-    async def update(self, entity_id: int, data: BaseModel) -> T | None:
+    async def update(self, entity_id: int, data: UpdateT) -> T | None:
         """Update an entity. Returns None if not found."""
 
     @abstractmethod

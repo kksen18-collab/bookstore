@@ -10,7 +10,7 @@ from bookstore.models.order import OrderCreate
 from bookstore.repositories.base import BaseRepository
 
 
-class OrderRepository(BaseRepository[OrderORM]):
+class OrderRepository(BaseRepository[OrderORM, OrderCreate, OrderCreate]):
     """SQLAlchemy implementation of Order data access."""
 
     def __init__(self, session: AsyncSession) -> None:
